@@ -47,11 +47,31 @@ public class ObjectMapperSample {
 		ObjectMapper mapper = new ObjectMapper();
 		JsonNode rootNode = mapper.readTree(jsonStr);
 		/*
+		Getting nodes from path.
 		ObjectNode objNode = (ObjectNode)rootNode.path("scopes");
 		*/
 		Iterator<String> nameList = (Iterator)rootNode.getFieldNames();
+		// Using method references.
 		nameList.forEachRemaining(System.out::println);
+		System.out.println("==============");
 		Iterator<Entry<String, JsonNode>> nameValLst = (Iterator)rootNode.getFields();
 		nameValLst.forEachRemaining(System.out::println);
 	}
 }
+	
+/*
+Output: -
+name
+id
+displayName
+audience
+scopes
+appRoles
+==============
+name="MyApp"
+id="01AbCC"
+displayName="My App"
+audience="http://mysite.com"
+scopes=[{"value":"docs","description":"open document"}]
+appRoles=["useradmin","resourceadmin"]
+*/
